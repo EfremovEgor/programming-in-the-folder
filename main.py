@@ -39,9 +39,26 @@ def create_file(name: str):
 def programming_loop():
     while True:
         if not os.path.isfile(STARING_FILE_PATH):
+
+            print()
             string_code = "\n".join(
                 file.split(" ", 1)[1]
-                for file in sorted(os.listdir(WORKING_FOLDER_PATH), key=lambda x: x[0])
+                .replace("∕", "/")
+                .replace("꞉", ":")
+                .replace("»", ">>")
+                .replace("«", "<<")
+                .replace("⊛", "*")
+                .replace("Ɂ", "?")
+                .replace("⑊", "\\")
+                .replace("↓", '"')
+                .replace("↑", "'")
+                .replace("←", ".")
+                for file in sorted(
+                    os.listdir(WORKING_FOLDER_PATH),
+                    key=lambda x: int(x.split(" ", 1)[0])
+                    if x.split(" ", 1)[0].isnumeric()
+                    else -1,
+                )
                 if file[0].isdigit()
             )
             for file in os.listdir(WORKING_FOLDER_PATH):
